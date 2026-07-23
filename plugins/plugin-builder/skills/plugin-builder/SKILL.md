@@ -30,7 +30,7 @@ Go through **every** field below — do not skip the optional ones, explicitly o
 **B. Display (`display`)**
 - **shortDescription** (10–150, trimmed).
 - **detail.description** (markdown, 50–20000, trimmed).
-- **categories** (1–3, distinct, from: accounting, warehouse, crm, e-commerce, payments, banking, reporting, other). ⚠️ Tento zoznam je **deployment-špecifický** — over ho proti `…/Kros.Framework.Plugins.Core/Enums/PluginCategory.cs` v cieľovom nasadení (jeden prototyp mal len `invoicing`). Viď poznámku „Enumy sú deployment-špecifické" v referencii.
+- **categories** — aktuálne nasadenie podporuje **len `invoicing`**, takže nastav presne `["invoicing"]` (nepýtaj sa používateľa na výber kategórie). ⚠️ Enum je deployment-špecifický a môže časom pribrať ďalšie hodnoty — v prípade pochybností over voči `…/Kros.Framework.Plugins.Core/Enums/PluginCategory.cs` alebo dry-run cez `/validate`. Viď poznámku „Enumy sú deployment-špecifické" v referencii.
 - **tags** (optional, ≤10, each 2–30, `[a-z0-9-]`) — propose from name + description, let the user edit or drop.
 
 **C. Partner (`partner`)**

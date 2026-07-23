@@ -16,7 +16,7 @@ Verified against `Kros.Framework.Plugins.Core/Manifest/ManifestDocument.cs`, `Kr
 
 ## display
 - `shortDescription`: required, 10–150 chars, trimmed.
-- `categories`: required, 1–3 items, distinct, each from the category enum below.
+- `categories`: required. Aktuálne nasadenie podporuje len jedinú kategóriu → musí byť presne `["invoicing"]` (viď category enum nižšie).
 - `tags`: optional, ≤10, distinct (case-insensitive); each 2–30 chars, regex `^[a-z0-9-]+$`.
 - `detail.description`: required, 50–20000 chars, trimmed (markdown).
 
@@ -44,8 +44,8 @@ Verified against `Kros.Framework.Plugins.Core/Manifest/ManifestDocument.cs`, `Kr
   - `manual.redirectUrl`: required, max 2048, **http or https**.
 
 ## Enums (kebab-case — NOT SPDX)
-> ⚠️ **Enumy sú deployment-špecifické.** Hodnoty nižšie sú z referenčného Frameworku, ale konkrétne nasadenie ich môže mať podmnožinu/inú sadu (napr. jeden prototyp mal v `PluginCategory` len `invoicing`). **Pred generovaním over `categories` (a v prípade pochybností aj license/auth) proti zdroju nasadenia** — `…/Kros.Framework.Plugins.Core/Enums/PluginCategory.cs` — alebo dry-run cez `/validate` a podľa chyby `Value 'x' is not a recognized PluginCategory` oprav. Nikdy slepo nedôveruj tomuto zoznamu.
-- **category**: `accounting`, `warehouse`, `crm`, `e-commerce`, `payments`, `banking`, `reporting`, `other`.
+> ⚠️ **Enumy sú deployment-špecifické.** License a auth hodnoty nižšie sú z referenčného Frameworku, ale konkrétne nasadenie ich môže mať podmnožinu/inú sadu. **Pred generovaním over hodnoty proti zdroju nasadenia** — `…/Kros.Framework.Plugins.Core/Enums/PluginCategory.cs` — alebo dry-run cez `/validate` a podľa chyby `Value 'x' is not a recognized PluginCategory` oprav. Nikdy slepo nedôveruj širším zoznamom.
+- **category**: aktuálne nasadenie podporuje **len `invoicing`**. `categories` teda musí byť presne `["invoicing"]`. (Framework enum môže časom pribrať ďalšie hodnoty — vtedy over voči `PluginCategory.cs` / `/validate`.)
 - **license type**: `proprietary`, `mit`, `apache-20`, `gpl-30`, `bsd-3-clause`, `lgpl-30`, `other`.
   > The converter hyphenates on letter/digit boundaries only: `Apache20`→`apache-20`, `Gpl30`→`gpl-30`, `Lgpl30`→`lgpl-30`, `Bsd3Clause`→`bsd-3-clause`. Do NOT use `apache-2.0`/`gpl-3.0`.
 - **auth method**: `token-broker`, `manual`.
@@ -70,7 +70,7 @@ The user supplies the **gateway root URL** (e.g. `https://localhost:5001`); the 
   "plugin": { "id": "sk.numera.cashflow-insight", "partnerId": "numera", "name": "Cashflow Insight", "version": "1.2.0", "requiresReconfiguration": false },
   "display": {
     "shortDescription": "Prediktívna analýza cashflow s 90-dňovým výhľadom.",
-    "categories": ["accounting", "reporting"],
+    "categories": ["invoicing"],
     "tags": ["cashflow", "forecasting", "analytics"],
     "detail": { "description": "## Cashflow Insight\n\nMarkdown popis dlhý aspoň 50 znakov ..." }
   },
@@ -92,7 +92,7 @@ The user supplies the **gateway root URL** (e.g. `https://localhost:5001`); the 
   "plugin": { "id": "sk.payhub.merchant-portal", "partnerId": "payhub", "name": "PayHub Merchant Portal", "version": "3.0.0", "requiresReconfiguration": false },
   "display": {
     "shortDescription": "Externý portál pre obchodníkov akceptujúcich kartové platby.",
-    "categories": ["payments"],
+    "categories": ["invoicing"],
     "tags": ["payments", "gateway", "merchant"],
     "detail": { "description": "## PayHub Merchant Portal\n\nMarkdown popis dlhý aspoň 50 znakov ..." }
   },
